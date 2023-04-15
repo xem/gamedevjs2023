@@ -26,10 +26,8 @@ a.onmousemove = (e) => {
   // Compute mouse coords in px and in tiles
   x = e.pageX - a.getBoundingClientRect().left - document.documentElement.scrollLeft - document.body.scrollLeft;
   y = e.pageY - a.getBoundingClientRect().top - document.documentElement.scrollTop - document.body.scrollTop;
-  tile_x = Math.floor(x / ((screen == 3 ? 32 : 32)));
-  tile_y = Math.floor((y - 40) / ((screen == 3 ? 32 : 32)));
-  if(tile_x > 19) tile_x = 19;
-  if(tile_y > 9) tile_y = 9;
+  tile_x = Math.floor(x / 32);
+  tile_y = Math.floor((y - 40) / 32);
   
   // Level editor only
   if(screen == 3){
@@ -98,7 +96,7 @@ var handle_clicks = (e) => {
     for(i = 0; i < 10; i++){
       for(j = 0; j < 3; j++){
         number = j * 10 + i + 1;
-        if(+localStorage["chronotorn"] >= number){
+        if(+localStorage["scpm"] >= number){
           c.beginPath();
           c.rect(i * 120 + 50, j * 100 + 120, 100, 80);
           if(c.isPointInPath(x, y)){
@@ -145,8 +143,8 @@ var handle_clicks = (e) => {
   
     // Build a hash with all the tiles #0 - #15 and #20 - #22 (i.e. all except pipes and pipe switches)
     level_data.hash = "";
-    for(j = 0; j < 10; j++){
-      for(i = 0; i < 20; i++){
+    for(j = 0; j < 20; j++){
+      for(i = 0; i < 40; i++){
         tile = level_data.tiles[j][i] || 0;
         tile = (tile < 16 || tile > 21) ? tile : 0;
         level_data.hash += String.fromCharCode(tile + 0x30);
@@ -169,8 +167,7 @@ var handle_clicks = (e) => {
     if(c.isPointInPath(x, y)){
       location.hash = "";
       if(level_data.tested == false){
-        console.log(JSON.stringify({hash:level_data.hash, pipes:level_data.pipes, balances: level_data.balances}))
-        //alert("You need to test and win your level first.");
+        alert("You need to test and win your level first.");
         window.open("https://www.twitter.com/intent/tweet?text=" + encodeURIComponent("I made a level for #SuperChronoPortalMaker !\nPlay the game here: " + location.origin + location.pathname + ". \nPlay my level here:" + encodeURI(location.origin + location.pathname + "#" + JSON.stringify({hash:level_data.hash, pipes:level_data.pipes, balances: level_data.balances})) + "\nPlz RT"));
       }
       else {

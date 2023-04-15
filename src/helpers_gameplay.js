@@ -7,11 +7,11 @@ var first_frame = function(){
     
   // Build map from hash
   level_data.tiles = [];
-  for(var j = 0; j < 10; j++){
+  for(var j = 0; j < 20; j++){
     level_data.tiles[j] = [];
-    for(var i = 0; i < 20; i++){
+    for(var i = 0; i < 40; i++){
       
-      level_data.tiles[j][i] = level_data.hash.charCodeAt(j * 20 + i) - 0x30;
+      level_data.tiles[j][i] = level_data.hash.charCodeAt(j * 40 + i) - 0x30;
 
       // Ignore tile #15 / "?" / balanced platforms placeholders.
       if(level_data.tiles[j][i] == 15){
@@ -90,8 +90,8 @@ var move_draw_pipes = function(){
 
 // Parse and draw map (at each frame, but if we're on frame 0, also set start coordinates, initialize cubes and build flag pole)
 var parse_draw_map = function(){
-  for(j = 0; j < 10; j++){
-    for(i = 0; i < 20; i++){
+  for(j = 0; j < 20; j++){
+    for(i = 0; i < 40; i++){
       
       // Current tile
       drawn_tile = level_data.tiles[j][i];
@@ -171,8 +171,8 @@ var reset_mechanisms = function(){
   
   // Reset yellow buttons
   yellow_toggle = false;
-  for(j = 0; j < 10; j++){
-    for(i = 0; i < 20; i++){
+  for(j = 0; j < 20; j++){
+    for(i = 0; i < 40; i++){
       if(level_data.tiles[j][i] == 25){
         level_data.tiles[j][i] = 11;
       }
@@ -1018,8 +1018,8 @@ var play_hero = (this_hero, past) => {
     // Win (all coins gathered and touch flag)
     if(tile_at(this_hero.x + hero_width / 2, this_hero.y + 16) == 2 || tile_at(this_hero.x + hero_width / 2, this_hero.y + 16) == 24){
       coins_left = 0;
-      for(j = 0; j < 10; j++){
-        for(i = 0; i < 20; i++){
+      for(j = 0; j < 20; j++){
+        for(i = 0; i < 40; i++){
           if(level_data.tiles[j][i] == 6){
            coins_left++;
           }
@@ -1069,7 +1069,7 @@ var play_hero = (this_hero, past) => {
       if(this_hero[portals[current_portal][0]]){
       
         // Make beam advance with baby steps
-        for(i = 0; i < 20; i++){
+        for(i = 0; i < 40; i++){
           this_hero[portals[current_portal][0]] += .001;
           this_hero.portal_shoot_x += this_hero[portals[current_portal][0]] * this_hero.portal_shoot_vx;
           this_hero.portal_shoot_y += this_hero[portals[current_portal][0]] * this_hero.portal_shoot_vy;
@@ -1191,7 +1191,7 @@ var draw_hero = (hero, past) => {
 
   // Draw (except if it's a past hero that has finished playing)
   if(! (past && frame > hero.last_frame)){
-    c.drawImage(tileset, [26, [27,28,29][~~(frame / 2) % 3], 30, 31][hero.state] * 16, 0, 16, 16, - hero_width / 2-16, -32, 64, 64);
+    c.drawImage(tileset, [26, [27,28,29][~~(frame / 2) % 3], 30, 31][hero.state] * 16, 0, 16, 16, - hero_width / 2, 40, 32, 32);
   }
   
   c.restore();
@@ -1231,8 +1231,8 @@ var update_mechanisms = () => {
   // Apply yellow toggle (invert plain and transparent tiles if yellow toggle has changed during this frame)
   if(yellow_toggle != yellow_toggle_last_frame){
     mkaudio(SNDswitch0).play();
-    for(j = 0; j < 10; j++){
-      for(i = 0; i < 20; i++){
+    for(j = 0; j < 20; j++){
+      for(i = 0; i < 40; i++){
         if(level_data.tiles[j][i] == 9){
           level_data.tiles[j][i] = 10;
         }
@@ -1281,20 +1281,20 @@ var update_mechanisms = () => {
     c.beginPath();
     c.strokeStyle = "#fff";
     c.lineWidth = 2;
-    //c.moveTo(level_data.balances[i][0] * 32 + 16, balances_state[i].y1 + 40 + 8);
-    //c.lineTo(level_data.balances[i][2] * 32 + 16, balances_state[i].y2 + 40 + 8);
+    c.moveTo(level_data.balances[i][0] * 32 + 16, balances_state[i].y1 + 40 + 8);
+    c.lineTo(level_data.balances[i][2] * 32 + 16, balances_state[i].y2 + 40 + 8);
     c.stroke();
     c.closePath();
     
     // Draw balance 1
-    draw_sprite(15, level_data.balances[i][0] * 64 - 32, balances_state[i].y1 * 2 + 40);
-    draw_sprite(15, level_data.balances[i][0] * 64, balances_state[i].y1 * 2 + 40);
-    draw_sprite(15, level_data.balances[i][0] * 64 + 32, balances_state[i].y1 * 2 + 40);
+    draw_sprite(15, level_data.balances[i][0] * 32 - 32, balances_state[i].y1 + 40);
+    draw_sprite(15, level_data.balances[i][0] * 32, balances_state[i].y1 + 40);
+    draw_sprite(15, level_data.balances[i][0] * 32 + 32, balances_state[i].y1 + 40);
     
     // Draw balance 2
-    draw_sprite(15, level_data.balances[i][2] * 64 - 32, balances_state[i].y2 * 2 + 40);
-    draw_sprite(15, level_data.balances[i][2] * 64, balances_state[i].y2 * 2 + 40);
-    draw_sprite(15, level_data.balances[i][2] * 64 + 32, balances_state[i].y2 * 2 + 40);
+    draw_sprite(15, level_data.balances[i][2] * 32 - 32, balances_state[i].y2 + 40);
+    draw_sprite(15, level_data.balances[i][2] * 32, balances_state[i].y2 + 40);
+    draw_sprite(15, level_data.balances[i][2] * 32 + 32, balances_state[i].y2 + 40);
   }
 }
 
@@ -1317,11 +1317,11 @@ var victory_or_defeat = () => {
       document.title = chrono;
       c.fillText("Time: " + (chrono / 30).toFixed(2) + "s", 640, 400);
       c.fillText("Dev record: " + (level_data.record / 30).toFixed(2) + "s", 640, 450);
-      if(localStorage["chronotorn" + level]){
-        localStorage["chronotorn" + level] = Math.min(+localStorage["chronotorn" + level], chrono);
+      if(localStorage["scpm" + level]){
+        localStorage["scpm" + level] = Math.min(+localStorage["scpm" + level], chrono);
       }
       else{
-        localStorage["chronotorn" + level] = chrono;
+        localStorage["scpm" + level] = chrono;
       }
     }
   }
@@ -1374,7 +1374,7 @@ var victory_or_defeat = () => {
     chrono = 0;
     if(last_screen == 1){
       level++;
-      localStorage["chronotorn"] = Math.max(+localStorage["chronotorn"], level);
+      localStorage["scpm"] = Math.max(+localStorage["scpm"], level);
     }
     a.width ^= 0;
     clearInterval(loop);

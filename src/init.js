@@ -5,7 +5,7 @@
 var c = a.getContext("2d");
 
 // Init local storage to 1 if it's not already set
-localStorage["chronotorn"] = localStorage["chronotorn"] || 1;
+localStorage["scpm"] = localStorage["scpm"] || 1;
 
 // Current screen (0: main menu / 1: level selection / 2: playing / 3: editor)
 var screen = 0;

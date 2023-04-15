@@ -1,30 +1,30 @@
 // Collection of helper functions often called (except by the game loop)
 
 // Draw a 32x32 tile aligned on the grid
-var draw_tile = (id, tile_x, tile_y, w, h) => {
-  c.drawImage(tileset, id * 16, 0, 16, 16, tile_x * (screen == 3 ? 32 : 64), (screen == 3 ? 40 : 0) + tile_y * (screen == 3 ? 32 : 64), screen == 3 ? 32 : 64, screen == 3 ? 32 : 64);
+var draw_tile = (id, tile_x, tile_y) => {
+  c.drawImage(tileset, id * 16, 0, 16, 16, tile_x * 32, 40 + tile_y * 32, 32, 32);
 }
 
 // Draw a 32x32 sprite anywhere (don't forget to add 40 to y to draw in the scene)
-var draw_sprite = (id, x, y, w, h) => {
-  c.drawImage(tileset, id * 16, 0, 16, 16, x, y, screen == 3 ? 32 : 64, screen == 3 ? 32 : 64);
+var draw_sprite = (id, x, y) => {
+  c.drawImage(tileset, id * 16, 0, 16, 16, x, y, 32, 32);
 }
 
 // Which tile is at these coordinates (in px)? (returns 0 by default)
 var tile_at = (x, y) => {
-  if(!level_data.tiles[~~(y / (screen == 3 ? 32 : 64))]){
+  if(!level_data.tiles[~~(y / 32)]){
     return 0;
   }
   
-  return level_data.tiles[~~(y / (screen == 3 ? 32 : 64))][~~(x / (screen == 3 ? 32 : 64))] || 0;
+  return level_data.tiles[~~(y / 32)][~~(x / 32)] || 0;
 }
 
 // Set a tile in the current level at these coordinates (in px)
 var set_tile = (x, y, value) => {
-  if(!level_data.tiles[~~(y / (screen == 3 ? 32 : 64))]){
+  if(!level_data.tiles[~~(y / 32)]){
     return;
   }
-  level_data.tiles[~~(y / (screen == 3 ? 32 : 64))][~~(x / (screen == 3 ? 32 : 64))] = value;
+  level_data.tiles[~~(y / 32)][~~(x / 32)] = value;
 }
 
 // Is a tile id currently solid? 
@@ -49,8 +49,8 @@ var is_writable = (tile_x, tile_y) => {
 var reset_hero = () => {
 
   return {
-    x: (level_data && level_data.start) ? level_data.start[0] * 64 : 640,
-    y: (level_data && level_data.start) ? level_data.start[1] * 64 : 0,
+    x: (level_data && level_data.start) ? level_data.start[0] * 32 : 640,
+    y: (level_data && level_data.start) ? level_data.start[1] * 32 : 0,
     vx: 0,
     vy: 0,
     grounded: 0,
