@@ -15,7 +15,7 @@ var play = () => {
     c.font = "bold 30px courier";
     c.fillStyle = "black";
     c.textAlign = "center";
-    c.fillText(level_data.txt || "", 640, 80);
+    c.fillText(level_data.txt || "", 640, level == 6 ? 60:80);
     if(level == 1) c.fillText("Use the red button to move the platform", 640, 120);
     if(level == 1) c.fillText("Press Space to use Overlord's Time Machine", 640, 160);
     if(level == 1) c.fillText("Bring the time crystal back to the Time Machine to win", 640, 200);
@@ -49,6 +49,13 @@ var play = () => {
   // Then, at each frame:
   // --------------------
   
+  for(i in level_data.balances){
+    c.beginPath();
+    c.fillStyle = "#000";
+    c.fillRect(level_data.balances[i][0] * 32 - 16, balances_state[i].y1 + 40 + 8, 64, 999);
+    c.fillRect(level_data.balances[i][2] * 32 - 16, balances_state[i].y2 + 40 + 8, 64, 999);
+    c.closePath();
+  }
   
   // Draw map
   parse_draw_map();
@@ -57,6 +64,8 @@ var play = () => {
   move_draw_pipes();
   // Reset all mechanisms
   reset_mechanisms();
+  
+
   
   // Replay previous heros inputs
   for(hero in heros){

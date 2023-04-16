@@ -114,6 +114,8 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     }
     reset_current_level();
     loop = setInterval(play, 33);
+    
+
   }
   
   // Level editor
@@ -249,13 +251,17 @@ var draw_screen = onload = onhashchange = (no_reset) => {
       if(level_data.balances[i][3]){
         
         // Draw line
-        c.beginPath();
-        c.strokeStyle = "#fff";
-        c.lineWidth = 2;
-        c.moveTo(level_data.balances[i][0] * 32 + 16, level_data.balances[i][1] * 32 + 40 + 8);
-        c.lineTo(level_data.balances[i][2] * 32 + 16, level_data.balances[i][3] * 32 + 40 + 8);
-        c.stroke();
-        c.closePath();
+        //c.beginPath();
+        //c.strokeStyle = "#000";
+        c.fillStyle = "#000";
+        //c.lineWidth = 2;
+        //c.moveTo(level_data.balances[i][0] * 32 + 16, level_data.balances[i][1] * 32 + 40 + 8);
+        //c.lineTo(level_data.balances[i][2] * 32 + 16, level_data.balances[i][3] * 32 + 40 + 8);
+        //c.stroke();
+        //c.fillRect(100, 100, 100, 999);
+        c.fillRect(level_data.balances[i][0] * 32 + 16, level_data.balances[i][1] * 32 + 40 + 8, 32, 999);
+        c.fillRect(level_data.balances[i][2] * 32 + 16, level_data.balances[i][3] * 32 + 40 + 8, 32, 999);
+        //c.closePath();
       
         // Balance 2
         draw_tile(15, level_data.balances[i][2] - 1, level_data.balances[i][3]);

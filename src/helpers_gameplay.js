@@ -279,8 +279,8 @@ var gravity_and_collisions = function(obj, obj_width, type){
       obj.vx = 0;
     }
     
-    if(obj.x > 1280 - obj_width){
-      obj.x = 1280 - obj_width;
+    if(obj.x > 640 - obj_width){
+      obj.x = 640 - obj_width;
       obj.vx = 0;
     }
     
@@ -1294,13 +1294,16 @@ var update_mechanisms = () => {
     }
     
     // Draw line
-    c.beginPath();
-    c.strokeStyle = "#fff";
-    c.lineWidth = 2;
-    c.moveTo(level_data.balances[i][0] * 32 + 16, balances_state[i].y1 + 40 + 8);
-    c.lineTo(level_data.balances[i][2] * 32 + 16, balances_state[i].y2 + 40 + 8);
-    c.stroke();
-    c.closePath();
+    // c.beginPath();
+    // c.fillStyle = "#000";
+    // c.lineWidth = 2;
+    // c.moveTo(level_data.balances[i][0] * 32 + 16, level_data.balances[i][1] * 32 + 40 + 8);
+    // c.lineTo(level_data.balances[i][2] * 32 + 16, level_data.balances[i][3] * 32 + 40 + 8);
+    // c.stroke();
+    // c.fillRect(100, 100, 100, 999);
+    // c.fillRect(level_data.balances[i][0] * 32 - 16, balances_state[i].y1 + 40 + 8, 64, 999);
+    // c.fillRect(level_data.balances[i][2] * 32 - 16, balances_state[i].y2 + 40 + 8, 64, 999);
+    // c.closePath();
     
     // Draw balance 1
     draw_sprite(15, level_data.balances[i][0] * 32 - 32, balances_state[i].y1 + 40);
@@ -1385,7 +1388,7 @@ var victory_or_defeat = () => {
   // Paradox (glitch)
   if(paradox_frame){
     for(m = ~~(paradox_frame / 5); m--;){
-      c.drawImage(a, i = Math.random() * 1280, j = Math.random() * 648, k = Math.random() * 1280, l = Math.random() * 648, i + Math.random() * 100 - 50, j + Math.random() * 100 - 50, k, l);
+      c.drawImage(a, i = Math.random() * 640, j = Math.random() * 320, k = Math.random() * 640, l = Math.random() * 320, i + Math.random() * 100 - 50, j + Math.random() * 100 - 50, k, l);
     }
   }
   
