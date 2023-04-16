@@ -6,7 +6,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
   a.width ^= 0;
   
   // Global text settings
-  c.font = "bold 30px arial";
+  c.font = "bold 30px courier";
   c.textAlign = "center";
   
   // Pixelize graphics
@@ -48,8 +48,8 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     parse_draw_map();
  
     // Show title
-    c.drawImage(tileset, 512, 0, 70, 16, 120, 150, 280, 64);
-    c.drawImage(tileset, 583, 0, 270, 16, 120, 250, 1080, 64);
+    //c.drawImage(tileset, 512, 0, 70, 16, 120, 150, 280, 64);
+    //c.drawImage(tileset, 583, 0, 270, 16, 120, 250, 1080, 64);
 
     // Draw buttons
     c.fillStyle = "#000";
@@ -73,7 +73,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     
     c.beginPath();
     c.fillStyle = "#000";
-    c.fillRect(590, 520, 100, 80);
+    //c.fillRect(590, 520, 100, 80);
     k = 0;
     for(i = 0; i < 10; i++){
       for(j = 0; j < 3; j++){
@@ -81,20 +81,20 @@ var draw_screen = onload = onhashchange = (no_reset) => {
         c.fillStyle = "#000";
         c.fillRect(i * 120 + 50, j * 100 + 120, 100, 80);
         c.fillStyle = "#fff";
-        c.fillText(+localStorage["scpm"] >= l ? l : "?", i * 120 + 100, j * 100 + 170);
-        if(localStorage["scpm" + l] <= levels[l].record){
+        c.fillText(+localStorage["chronorobot"] >= l ? l : "?", i * 120 + 100, j * 100 + 170);
+        if(localStorage["chronorobot" + l] <= levels[l].record){
           c.fillText("🏅", i * 120 + 135, j * 100 + 145);
         }
-        k += (+localStorage["scpm" + l] || 0);
+        k += (+localStorage["chronorobot" + l] || 0);
       }
     }
-    c.fillText("◀", 40, 70);
-    c.fillText("JS13K LEVELS", 640, 70);
-    c.fillText("TWITTER LEVELS", 640, 470);
-    c.fillText("GO", 640, 570);
     c.fillStyle = "#000";
+    c.fillText("◀", 70, 70);
+    //c.fillText("JS13K LEVELS", 640, 70);
+    //c.fillText("TWITTER LEVELS", 640, 470);
+    //c.fillText("GO", 640, 570);
     if(k){
-      c.fillText("Total time: " + ~~((k / 30) / 60) + ":" + ("0" + ((k / 30) % 60).toFixed(2)).slice(-5), 1100, 450);
+      c.fillText("Total time: " + ~~((k / 30) / 60) + ":" + ("0" + ((k / 30) % 60).toFixed(2)).slice(-5), 1050, 450);
     }
     c.stroke();
     c.closePath();
@@ -107,6 +107,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     
     // Cursor
     a.style.cursor = "crosshair";
+    
     
     if(loop){
       clearInterval(loop);
@@ -207,7 +208,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
         
         // Pipe body below low position (can be overwritten)
         end_pipe = false;
-        for(k = pipe_low + 1; k < 21; k++){
+        for(k = pipe_low ; k < 21; k++){
           if(k < 20 && !level_data.tiles[k][level_data.pipes[i][0]] && !level_data.tiles[k][level_data.pipes[i][0] + 1] && !end_pipe){
             draw_tile(18, level_data.pipes[i][0], k);
             draw_tile(19, level_data.pipes[i][0] + 1, k);
@@ -323,11 +324,11 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.beginPath();
     c.strokeStyle = "#777";
     c.lineWidth = 1;
-    for(i = 0; i < 40; i++){
+    for(i = 0; i < 21; i++){
       c.moveTo(i * 32, 40);
       c.lineTo(i * 32, 648);
     }
-    for(j = 0; j < 20; j++){
+    for(j = 0; j < 10; j++){
       c.moveTo(0, 40 + j * 32);
       c.lineTo(1280, 40 + j * 32);
     }
@@ -339,7 +340,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.fillRect(1000, 4, 100, 32);
     c.fillRect(1125, 4, 100, 32);
     c.fillStyle = "#fff";
-    c.font = "bold 20px arial";
+    c.font = "bold 20px courier";
     c.fillText("TEST", 800, 28);
     c.fillText("SHARE", 925, 28);
     c.fillText("CLEAR", 1050, 28);

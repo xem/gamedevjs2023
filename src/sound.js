@@ -4,7 +4,7 @@ function mkaudio(fn) {
 	for (var i = 0;;i++) {
 		var smp = fn(i);
 		if (smp===null) break;
-		data.push(smp);
+		data.push(smp/5);
 	}
 	var l = data.length;
 	var l2=l*2;

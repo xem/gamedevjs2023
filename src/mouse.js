@@ -88,7 +88,7 @@ var handle_clicks = (e) => {
     c.beginPath();
     c.rect(590, 520, 100, 80);
     if(c.isPointInPath(x, y)){
-      window.open("https://twitter.com/search?f=tweets&q=%23SuperChronoPortalMaker");
+      //window.open("https://twitter.com/search?f=tweets&q=%23SuperChronoPortalMaker");
     }
     c.closePath();
     
@@ -96,7 +96,7 @@ var handle_clicks = (e) => {
     for(i = 0; i < 10; i++){
       for(j = 0; j < 3; j++){
         number = j * 10 + i + 1;
-        if(+localStorage["scpm"] >= number){
+        if(+localStorage["chronorobot"] >= number){
           c.beginPath();
           c.rect(i * 120 + 50, j * 100 + 120, 100, 80);
           if(c.isPointInPath(x, y)){
@@ -129,7 +129,8 @@ var handle_clicks = (e) => {
     // Quit
     c.beginPath();
     c.rect(1240, 0, 32, 32);
-    if(c.isPointInPath(x, y)){
+    console.log(x,y);
+    if(x > 1240 && y < 40){
       clearInterval(loop);
       screen = last_screen;
       draw_screen();
@@ -167,11 +168,12 @@ var handle_clicks = (e) => {
     if(c.isPointInPath(x, y)){
       location.hash = "";
       if(level_data.tested == false){
-        alert("You need to test and win your level first.");
-        window.open("https://www.twitter.com/intent/tweet?text=" + encodeURIComponent("I made a level for #SuperChronoPortalMaker !\nPlay the game here: " + location.origin + location.pathname + ". \nPlay my level here:" + encodeURI(location.origin + location.pathname + "#" + JSON.stringify({hash:level_data.hash, pipes:level_data.pipes, balances: level_data.balances})) + "\nPlz RT"));
+        console.log(JSON.stringify({hash:level_data.hash, pipes:level_data.pipes, balances: level_data.balances}));
+        //alert("You need to test and win your level first.");
+        //window.open("https://www.twitter.com/intent/tweet?text=" + encodeURIComponent("I made a level for #SuperChronoPortalMaker !\nPlay the game here: " + location.origin + location.pathname + ". \nPlay my level here:" + encodeURI(location.origin + location.pathname + "#" + JSON.stringify({hash:level_data.hash, pipes:level_data.pipes, balances: level_data.balances})) + "\nPlz RT"));
       }
       else {
-        window.open("https://www.twitter.com/intent/tweet?text=" + encodeURIComponent("I made a level for #SuperChronoPortalMaker !\nPlay the game here: " + location.origin + location.pathname + ". \nPlay my level here:" + encodeURI(location.origin + location.pathname + "#" + JSON.stringify({hash:level_data.hash, pipes:level_data.pipes, balances: level_data.balances})) + "\nPlz RT"));
+        //window.open("https://www.twitter.com/intent/tweet?text=" + encodeURIComponent("I made a level for #SuperChronoPortalMaker !\nPlay the game here: " + location.origin + location.pathname + ". \nPlay my level here:" + encodeURI(location.origin + location.pathname + "#" + JSON.stringify({hash:level_data.hash, pipes:level_data.pipes, balances: level_data.balances})) + "\nPlz RT"));
         shared = true;
       }
     }
@@ -187,6 +189,7 @@ var handle_clicks = (e) => {
     c.closePath();
     
     // Exit
+    
     c.beginPath();
     c.rect(1125, 4, 100, 32);
     if(c.isPointInPath(x, y)){

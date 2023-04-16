@@ -629,7 +629,7 @@ var gravity_and_collisions = function(obj, obj_width, type){
   
   
   // Teleport
-  if(obj.teleport){
+  /*if(obj.teleport){
     obj.teleport = false;
     obj.grounded = false;
     
@@ -665,7 +665,7 @@ var gravity_and_collisions = function(obj, obj_width, type){
       obj.vy = 0;
       obj.x -= 8;
     }
-  }
+  }*/
   
   // Press yellow switch (at the bottom left or right)
   if(tile_at(obj.x, obj.y + 20) == 11){
@@ -848,8 +848,23 @@ var play_hero = (this_hero, past) => {
         tile_at(this_hero.x + hero_width, this_hero.y + 31) == 23
       ){
         
+        // Win (all coins gathered)
+        coins_left = 0;
+        for(j = 0; j < 20; j++){
+          for(i = 0; i < 40; i++){
+            if(level_data.tiles[j][i] == 6){
+             coins_left++;
+            }
+          }
+        }
+        if(!past && coins_left == 0){
+          win = true;
+          this_hero.state = 0;
+        }
+        
+        
         // Present hero: remember the frame and add it to the array of past heros and go back to the beginning of time (frame -1)
-        if(!past){
+        else if(!past){
           this_hero.last_frame = frame;
           heros.push(this_hero);
           frame = -1;
@@ -861,7 +876,7 @@ var play_hero = (this_hero, past) => {
           this_hero.safe = true;
         }
         
-        mkaudio(SNDtimetravel0).play();
+        if(!win) mkaudio(SNDtimetravel0).play();
       }
     }
     
@@ -1031,7 +1046,7 @@ var play_hero = (this_hero, past) => {
       }
     }
     
-    // Send portals (only if hero's not currently in a portal)
+    /*// Send portals (only if hero's not currently in a portal)
     if(!this_hero.in_portal && (this_hero.leftclick[frame] || this_hero.rightclick[frame])){
         
       // Cancel current shoots
@@ -1153,7 +1168,7 @@ var play_hero = (this_hero, past) => {
     // Decrement teleportation idle delay
     if(this_hero.teleport_idle){
       this_hero.teleport_idle--;
-    }
+    }*/
   }
   
   // Death animation
@@ -1185,13 +1200,14 @@ var draw_hero = (hero, past) => {
   
   // Present and past heros exist: add arrow to present
   else if(heros.length){
-    c.fillStyle = "#fff";
-    c.fillText("▼", 0, 10);
+    c.fillStyle = "#00A800";
+    if(hero.direction == 0) c.fillText("▼", 0, 30); // left
+    else c.fillText("▼", 0, 30);
   }
 
   // Draw (except if it's a past hero that has finished playing)
   if(! (past && frame > hero.last_frame)){
-    c.drawImage(tileset, [26, [27,28,29][~~(frame / 2) % 3], 30, 31][hero.state] * 16, 0, 16, 16, - hero_width / 2, 40, 32, 32);
+    c.drawImage(tileset, [26, [27,28,29][~~(frame / 2) % 3], 30, 31][hero.state] * 32, 0, 32, 32, - hero_width / 2, 40, 32, 32);
   }
   
   c.restore();
@@ -1302,26 +1318,29 @@ var update_mechanisms = () => {
 // Defeat (write "LOST" or "PARADOX" for 30 frames and exit)
 var victory_or_defeat = () => {
   
-  c.font = "bold 100px arial";
-  c.fillStyle = "#000";
+  c.font = "bold 50px courier";
+  c.fillStyle = "#00A800";
   c.textAlign = "center";
   
   // Win
   if(win){
     win_frame++;
-    c.fillText("CLEARED!", 640, 300);
-    c.font = "bold 30px arial";
+      c.fillStyle = "#000";
+      c.fillRect(170, 105, 290, 110);
+      c.fillStyle = "#00A800";
+    c.fillText("CLEARED!", 320, 150);
+    c.font = "bold 24px courier";
     if(last_screen == 1){
-      c.fillRect(450, 350, 400, 130);
-      c.fillStyle = "#fff";
       document.title = chrono;
-      c.fillText("Time: " + (chrono / 30).toFixed(2) + "s", 640, 400);
-      c.fillText("Dev record: " + (level_data.record / 30).toFixed(2) + "s", 640, 450);
-      if(localStorage["scpm" + level]){
-        localStorage["scpm" + level] = Math.min(+localStorage["scpm" + level], chrono);
+      c.fillText("Time: " + (chrono / 30).toFixed(2) + "s", 320, 175);
+      c.fillText("Dev record: " + (level_data.record / 30).toFixed(2) + "s", 320, 195);
+      if(localStorage["chronorobot" + level]){
+        localStorage["chronorobot" + level] = Math.min(+localStorage["chronorobot" + level], chrono);
       }
       else{
-        localStorage["scpm" + level] = chrono;
+        console.log(localStorage["chronorobot" + level], chrono);
+        localStorage["chronorobot" + level] = chrono;
+        console.log(localStorage["chronorobot" + level], chrono);
       }
     }
   }
@@ -1330,7 +1349,7 @@ var victory_or_defeat = () => {
   if(current_hero.state == 3){
     lose_frame++;
     
-    c.fillText("LOST!", 640, 350);
+    c.fillText("LOST!", 320, 150);
   }
   
   for(hero in heros){
@@ -1338,7 +1357,7 @@ var victory_or_defeat = () => {
     // Past hero dies or gets stuck (not at the time machine at the end of his frame record)
     if(heros[hero].state == 3 || (heros[hero].last_frame < frame && !heros[hero].safe && !win)){
       paradox_frame++;
-      c.fillText("PARADOX!", 640, 350);
+      c.fillText("PARADOX!", 320, 150);
     }
   }
   
@@ -1370,11 +1389,11 @@ var victory_or_defeat = () => {
     }
   }
   
-  if(win_frame >= 90){
+  if(win_frame >= 120){
     chrono = 0;
     if(last_screen == 1){
       level++;
-      localStorage["scpm"] = Math.max(+localStorage["scpm"], level);
+      localStorage["chronorobot"] = Math.max(+localStorage["chronorobot"], level);
     }
     a.width ^= 0;
     clearInterval(loop);
@@ -1433,6 +1452,6 @@ var move_cubes = () => {
     }
 
     // Draw cube
-    c.drawImage(tileset, 12 * 16, 0, 16, 16, level_data.cubes[i].x, 40 + level_data.cubes[i].y, 32, 32);
+    c.drawImage(tileset, 12 * 32, 0, 32, 32, level_data.cubes[i].x, 40 + level_data.cubes[i].y, 32, 32);
   }
 }

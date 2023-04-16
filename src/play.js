@@ -6,16 +6,19 @@ var play = () => {
   a.width ^= 0;
   
   // Draw exit button
-  c.font = "bold 30px arial";
+  c.font = "bold 30px courier";
   c.fillStyle = "#000";
   c.fillText("×", 1255, 25);
   
   // First levels: add text
   if(last_screen == 1){
-    c.font = "bold 30px arial";
+    c.font = "bold 30px courier";
     c.fillStyle = "black";
     c.textAlign = "center";
     c.fillText(level_data.txt || "", 640, 80);
+    if(level == 1) c.fillText("Use the red button to move the platform", 640, 120);
+    if(level == 1) c.fillText("Press Space to use Overlord's Time Machine", 640, 160);
+    if(level == 1) c.fillText("Bring the time crystal back to the Time Machine to win", 640, 200);
   }
   
   // Save keys being pressed (for latest hero only)
@@ -41,15 +44,17 @@ var play = () => {
     first_frame();
   }
   
+  c.scale(2,2);
+  
   // Then, at each frame:
   // --------------------
   
-  // Move and draw pipes
-  move_draw_pipes();
   
   // Draw map
   parse_draw_map();
   
+  // Move and draw pipes
+  move_draw_pipes();
   // Reset all mechanisms
   reset_mechanisms();
   
@@ -80,7 +85,7 @@ var play = () => {
   draw_hero(current_hero);
   
   // Draw tiles that have portals, and portals in foreground
-  draw_portals();
+  //draw_portals();
   
   // Mechanisms
   // ==========
