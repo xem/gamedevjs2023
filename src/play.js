@@ -51,9 +51,9 @@ var play = () => {
   
   for(i in level_data.balances){
     c.beginPath();
-    c.fillStyle = "#000";
-    c.fillRect(level_data.balances[i][0] * 32 - 16, balances_state[i].y1 + 40 + 8, 64, 999);
-    c.fillRect(level_data.balances[i][2] * 32 - 16, balances_state[i].y2 + 40 + 8, 64, 999);
+    c.fillStyle = "#000b";
+    c.fillRect(level_data.balances[i][0] * 32, balances_state[i].y1 + 40 + 8, 32, 999);
+    c.fillRect(level_data.balances[i][2] * 32, balances_state[i].y2 + 40 + 8, 32, 999);
     c.closePath();
   }
   
