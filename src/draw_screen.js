@@ -62,7 +62,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
         c.fillStyle = "#000";
         c.fillRect(i * 120 + 50, j * 100 + 120, 100, 80);
         c.fillStyle = "#fff";
-        c.fillText(+localStorage["chronorobot"] >= l ? l : "?", i * 120 + 100, j * 100 + 170);
+        c.fillText(+localStorage["chronorobot"] >= (l-2) ? l : "?", i * 120 + 100, j * 100 + 170);
         if(localStorage["chronorobot" + l] <= levels[l].record){
           c.fillText("🏅", i * 120 + 135, j * 100 + 145);
         }
