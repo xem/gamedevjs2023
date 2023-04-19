@@ -964,18 +964,18 @@ var play_hero = (this_hero, past) => {
       current_cube.cube_below = null;
 
       // Throw it if hero is not grounded
-      /*if(!this_hero.grounded){
+      if(!this_hero.grounded){
         
         // Left
-        if(this_hero.direction == 0){
+        if(this_hero.direction == 0 && !is_solid(tile_at(current_cube.x - 14, current_cube.y + 16))){
           current_cube.vx = -14;
         }
         
         // Right
-        else{
+        else if (this_hero.direction == 1 && !is_solid(tile_at(current_cube.x + 32 + 14, current_cube.y + 16))){
           current_cube.vx = 14;
         }
-      }*/
+      }
       
       // Avoid collisions
       if(is_solid(tile_at(current_cube.x, current_cube.y))){

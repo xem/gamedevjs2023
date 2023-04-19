@@ -6,9 +6,9 @@ var play = () => {
   a.width ^= 0;
   
   // Draw exit button
-  c.font = "bold 30px courier";
+  c.font = "bold 60px courier";
   c.fillStyle = "#000";
-  c.fillText("×", 1255, 25);
+  c.fillText("×", 1245, 35);
   
   // First levels: add text
   if(last_screen == 1){
@@ -19,7 +19,7 @@ var play = () => {
     if(level == 1) c.fillText("Use the red button to move the platform", 640, 120);
     if(level == 1) c.fillText("Press Space to use Overlord's Time Machine", 640, 160);
     if(level == 1) c.fillText("Bring the time crystal back to the Time Machine to win", 640, 200);
-    if(level == 12) c.fillText("if each robot reaches the time machine correctly", 640, 120);
+    if(level == 12) c.fillText("if each robot reaches the machine on time", 640, 120);
   }
   
   // Save keys being pressed (for latest hero only)
