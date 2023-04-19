@@ -392,8 +392,8 @@ var gravity_and_collisions = function(obj, obj_width, type){
   if(!obj.in_portal){
     obj.grounded = false;
     obj.vy += gravity;
-    if(obj.vy > max_fall_speed){
-      obj.vy = max_fall_speed;
+    if(obj.vy > max_fall_speed-(level==16?10:0)) {
+      obj.vy = max_fall_speed-(level==16?10:0); 
     }
   }
   
