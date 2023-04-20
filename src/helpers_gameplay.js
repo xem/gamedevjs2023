@@ -848,7 +848,20 @@ var play_hero = (this_hero, past) => {
         tile_at(this_hero.x + hero_width, this_hero.y + 31) == 23
       ){
         
-        // Win (all coins gathered)
+        // remember that he's safe
+        this_hero.safe = true;
+        
+        allsafe = true;
+        if(!current_hero.safe) allsafe = false;
+        for(ii in heros){
+          if(!heros[ii].safe){
+            allsafe = false;
+          }
+        }
+          
+        console.log(allsafe);
+        
+        // Win (all coins gathered + all robots safe)
         coins_left = 0;
         for(j = 0; j < 20; j++){
           for(i = 0; i < 40; i++){
@@ -857,24 +870,40 @@ var play_hero = (this_hero, past) => {
             }
           }
         }
-        if(!past && coins_left == 0){
+        if(coins_left == 0 && allsafe){
           win = true;
+          
           this_hero.state = 0;
         }
         
         
         // Present hero: remember the frame and add it to the array of past heros and go back to the beginning of time (frame -1)
-        else if(!past){
-          this_hero.last_frame = frame;
+        /*
+        if(!past){
+          
           heros.push(this_hero);
-          frame = -1;
-          current_hero = reset_hero();
+          //frame = -1;
+          //current_hero = reset_hero();
         }
         
-        // Past hero: remember that he's safe
-        else{
-          this_hero.safe = true;
+        // reset if no win
+        if(!win){
+          //frame = -1;
+          //if(!past)current_hero = reset_hero();
+        }*/
+        
+        // if present and all heros safe but no win yet: reset 
+        if(!win){
+          
+          if(allsafe){
+            this_hero.last_frame = frame;
+            heros.push(this_hero);
+            frame = -1;
+            current_hero = reset_hero();
+          }
         }
+
+        
         
         if(!win) mkaudio(SNDtimetravel0).play();
       }
@@ -1201,12 +1230,12 @@ var draw_hero = (hero, past) => {
   // Present and past heros exist: add arrow to present
   else if(heros.length){
     c.fillStyle = "#00A800";
-    if(hero.direction == 0) c.fillText("▼", 0, 30); // left
-    else c.fillText("▼", 0, 30);
+    if(hero.direction == 0){ if(!hero.safe) c.fillText("▼", 0, 30) } // left
+    else { if(!hero.safe) c.fillText("▼", 0, 30) }
   }
 
   // Draw (except if it's a past hero that has finished playing)
-  if(! (past && frame > hero.last_frame)){
+  if(! (hero.safe)){
     c.drawImage(tileset, [26, [27,28,29][~~(frame / 2) % 3], 30, 31][hero.state] * 32, 0, 32, 32, - hero_width / 2, 40, 32, 32);
   }
   

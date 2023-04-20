@@ -66,7 +66,7 @@ var reset_hero = () => {
     rightclick: [],
     angle: 0,
     direction: 1, // 0: left, 1: right
-    state: 0, // 0: idle, 1: walking, 2: jumping, 3: dead
+    state: 0, // 0: idle, 1: walking, 2: jumping, 3: dead, 4: safe
     cube_held: null,
     cube_below: null,
     position_on_cube: null,

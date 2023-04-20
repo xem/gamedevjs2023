@@ -15,7 +15,7 @@ var play = () => {
     c.font = "bold 30px courier";
     c.fillStyle = "black";
     c.textAlign = "center";
-    c.fillText(level_data.txt || "", 640, level == 6 ? 60:80);
+    c.fillText(level_data.txt || "", 640, (level == 6 || level == 17) ? 60:80);
     if(level == 1) c.fillText("Use the red button to move the platform", 640, 120);
     if(level == 1) c.fillText("Press Space to use Overlord's Time Machine", 640, 160);
     if(level == 1) c.fillText("Bring the time crystal back to the Time Machine to win", 640, 200);
