@@ -457,17 +457,27 @@ var gravity_and_collisions = function(obj, obj_width, type){
   
     // Stop falling if a solid tile is under object (or a spike, if the object is a cube)
     else if(
-      is_solid(tile_at(obj.x, obj.y + 32 + obj.vy))
-      ||
-      is_solid(tile_at(obj.x + obj_width - 1, obj.y + 32 + obj.vy))
-      ||
-      (type == 1 && tile_at(obj.x, obj.y + 32 + obj.vy) == 7)
-      ||
-      (type == 1 && tile_at(obj.x + obj_width - 1, obj.y + 32 + obj.vy) == 7)
+      //((type == 1 && (level < 20 || obj.x > 4)) || type == 0)
+      //&& 
+      (
+        is_solid(tile_at(obj.x, obj.y + 32 + obj.vy))
+        ||
+        is_solid(tile_at(obj.x + obj_width - 1, obj.y + 32 + obj.vy))
+        ||
+        (type == 1 && tile_at(obj.x, obj.y + 32 + obj.vy) == 7)
+        ||
+        (type == 1 && tile_at(obj.x + obj_width - 1, obj.y + 32 + obj.vy) == 7)
+      )
     ){
       obj.y = ~~((obj.y + obj.vy) / 32) * 32;
       obj.vy = 0;
       obj.grounded = true;
+      
+    }
+    
+    if(level == 20 && type == 1 && obj.x < 4 * 32 && obj.y > 7 * 32){
+      console.log("A");
+      obj.y = 6 * 32;
     }
     
     // Stop falling if a cube is under object (only if the cube and the object are not in a portal)
@@ -846,6 +856,10 @@ var play_hero = (this_hero, past) => {
         tile_at(this_hero.x, this_hero.y + 31) == 23
         ||
         tile_at(this_hero.x + hero_width, this_hero.y + 31) == 23
+        ||
+        tile_at(this_hero.x, this_hero.y + 63) == 23
+        ||
+        tile_at(this_hero.x + hero_width, this_hero.y + 63) == 23
       ){
         
         // remember that he's safe
@@ -911,33 +925,39 @@ var play_hero = (this_hero, past) => {
     
     // Die (spike)
     if(
-      tile_at(this_hero.x + 3, this_hero.y) == 7
-      ||
-      tile_at(this_hero.x + hero_width - 3, this_hero.y) == 7
-      ||
-      tile_at(this_hero.x + 3, this_hero.y + 5) == 7
-      ||
-      tile_at(this_hero.x + hero_width - 3, this_hero.y + 5) == 7
+      !this_hero.safe &&
+      (
+        tile_at(this_hero.x + 3, this_hero.y) == 7
+        ||
+        tile_at(this_hero.x + hero_width - 3, this_hero.y) == 7
+        ||
+        tile_at(this_hero.x + 3, this_hero.y + 5) == 7
+        ||
+        tile_at(this_hero.x + hero_width - 3, this_hero.y + 5) == 7
+      )
     ){
       this_hero.state = 3;
       this_hero.vy = -1 * jump_speed;
     }
     
     // Die (fall)
-    if(this_hero.y > 648){
+    if(!this_hero.safe && this_hero.y > 648){
       this_hero.state = 3;
       this_hero.vy = -1.5 * jump_speed;
     }
     
     // Die (if a solid yellow block (#9) appears on top of the hero)
     if(
-      (tile_at(this_hero.x + 1, this_hero.y + 1) == 9)
-      ||
-      (tile_at(this_hero.x + hero_width - 1, this_hero.y + 1) == 9)
-      ||
-      (tile_at(this_hero.x + 1, this_hero.y + 31) == 9)
-      ||
-      (tile_at(this_hero.x + hero_width - 1, this_hero.y + 31) == 9)
+      !this_hero.safe &&
+      (
+        (tile_at(this_hero.x + 1, this_hero.y + 1) == 9)
+        ||
+        (tile_at(this_hero.x + hero_width - 1, this_hero.y + 1) == 9)
+        ||
+        (tile_at(this_hero.x + 1, this_hero.y + 31) == 9)
+        ||
+        (tile_at(this_hero.x + hero_width - 1, this_hero.y + 31) == 9)
+      )
     ){
       this_hero.state = 3;
       this_hero.vy = -1.5 * jump_speed;
@@ -945,6 +965,8 @@ var play_hero = (this_hero, past) => {
     
     // Die (crush between a pipe or a balance and a solid tile)
     if(
+      !this_hero.safe 
+      &&
       this_hero.on_moving_object
       &&
       (
