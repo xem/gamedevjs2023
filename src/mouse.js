@@ -97,9 +97,7 @@ var handle_clicks = (e) => {
     c.beginPath();
     c.rect(50,450,500,100);
     if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 21){
-      screen = 3;
-      reset_maker_level();
-      draw_screen();
+      location = "https://xem.github.io/gamedevjs2023/editor/index.html";
     }
     c.closePath();
     
@@ -120,7 +118,7 @@ var handle_clicks = (e) => {
     
     // Levels
     for(i = 0; i < 10; i++){
-      for(j = 0; j < 3; j++){
+      for(j = 0; j < 2; j++){
         number = j * 10 + i + 1;
         if(+localStorage["chronorobot"] >= (number - 2)){
           c.beginPath();

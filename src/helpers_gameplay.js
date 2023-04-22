@@ -706,8 +706,10 @@ var gravity_and_collisions = function(obj, obj_width, type){
 // Play or replay a given hero (past: 1 / present: 0)
 var play_hero = (this_hero, past) => {
   
+  //if(past) console.log(this_hero);
+  
   // If he's not dead and didn't win yet
-  if(this_hero.state != 3 && !win && !paradox_frame){
+  if(this_hero.state != 3 && !win && !paradox_frame && !this_hero.safe && this_hero.state != 4){
     
     // Reset to idle state, consider he's not on a moving object
     this_hero.state = 0;
@@ -911,7 +913,7 @@ var play_hero = (this_hero, past) => {
           
           if(allsafe){
             this_hero.last_frame = frame;
-            heros.push(this_hero);
+            heros.push(current_hero); // lost one evening on this
             frame = -1;
             current_hero = reset_hero();
           }
@@ -1014,8 +1016,8 @@ var play_hero = (this_hero, past) => {
       current_cube.x = this_hero.x;
       current_cube.cube_below = null;
 
-      // Throw it if hero is not grounded
-      if(!this_hero.grounded){
+      // Throw it if hero is not grounded and game complete
+      if(!this_hero.grounded && +localStorage["chronorobot"] >= 21){
         
         // Left
         if(this_hero.direction == 0 && !is_solid(tile_at(current_cube.x - 14, current_cube.y + 16))){
