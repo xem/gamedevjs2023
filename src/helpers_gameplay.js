@@ -476,7 +476,7 @@ var gravity_and_collisions = function(obj, obj_width, type){
     }
     
     if(level == 20 && type == 1 && obj.x < 4 * 32 && obj.y > 7 * 32){
-      console.log("A");
+      //console.log("A");
       obj.y = 6 * 32;
     }
     
@@ -873,7 +873,7 @@ var play_hero = (this_hero, past) => {
           }
         }
           
-        console.log(allsafe);
+        //console.log(allsafe);
         
         // Win (all coins gathered + all robots safe)
         coins_left = 0;
@@ -1394,7 +1394,7 @@ var victory_or_defeat = () => {
       else{
         console.log(localStorage["chronorobot" + level], chrono);
         localStorage["chronorobot" + level] = chrono;
-        console.log(localStorage["chronorobot" + level], chrono);
+        //console.log(localStorage["chronorobot" + level], chrono);
       }
     }
   }

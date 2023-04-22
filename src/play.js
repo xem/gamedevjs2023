@@ -18,7 +18,7 @@ var play = () => {
     c.fillText(level_data.txt || "", 640, (level == 6 || level == 17) ? 60:80);
     if(level == 1) c.fillText("Use the red button to move the platform", 640, 120);
     if(level == 1) c.fillText("Press Space to use Overlord's Time Machine", 640, 160);
-    if(level == 1) c.fillText("Bring the time crystal back to the Time Machine to win", 640, 200);
+    if(level == 1) c.fillText("Bring the Chrono Crystal back to the Time Machine to win", 640, 200);
     if(level == 12) c.fillText("if each robot reaches the machine on time", 640, 120);
   }
   
