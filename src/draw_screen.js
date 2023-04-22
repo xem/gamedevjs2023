@@ -59,21 +59,8 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.font = "bold 50px courier"
     c.fillText("Levels", 600,80);
     c.fillText("Bonus", 300,400);
-    c.fillStyle = "#888";
-    c.fillRect(50,450,500,100);
-    c.fillRect(50,570,500,100);
-    c.font = "bold 30px courier"
-    c.fillStyle = "#fff";
-    c.fillText("Level editor",290,490);
-    c.font = "bold 25px courier"
-    c.fillText("(complete the game to unlock)",290,530);
     
-    c.font = "bold 30px courier"
-    c.fillStyle = "#fff";
-    c.fillText("Web3 Leaderboards / shop",290,610);
     c.font = "bold 25px courier"
-    c.fillText("(beat the dev times to unlock)",290,650);
-    
     //c.fillRect(590, 520, 100, 80);
     k = 0;
     for(i = 0; i < 10; i++){
@@ -89,6 +76,28 @@ var draw_screen = onload = onhashchange = (no_reset) => {
         k += (+localStorage["chronorobot" + l] || 0);
       }
     }
+    
+    
+    
+    c.fillStyle = (+localStorage["chronorobot"] == 21 ? "#000" : "#888");
+    c.fillRect(50,450,500,100);
+    c.fillStyle = (k <= 11730 ? "#000" : "#888");
+    c.fillRect(50,570,500,100);
+    c.font = "bold 30px courier"
+    c.fillStyle = "#fff";
+    c.fillText("Level editor",290,490);
+    c.font = "bold 25px courier"
+    c.fillText("(complete the game to unlock)",290,530);
+    
+    c.font = "bold 30px courier"
+    c.fillStyle = "#fff";
+    c.fillText("Web3 Leaderboards / shop",290,610);
+    c.font = "bold 25px courier"
+    c.fillText("(beat the dev times to unlock)",290,650);
+    console.log(k);
+    
+    
+    
     c.fillStyle = "#000";
     //c.fillText("◀", 70, 70);
     //c.fillText("JS13K LEVELS", 640, 70);
@@ -101,8 +110,9 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.stroke();
     c.closePath();
     
-    c.drawImage(ol, 800, 380, 400, 400);
-    c.drawImage(rob, 750, 550, 123, 202);
+    c.drawImage(arc, 970, 550, 300, 313);
+    c.drawImage(ol, 670, 380, 400, 400);
+    c.drawImage(rob, 620, 570, 123, 202);
       
   }
   

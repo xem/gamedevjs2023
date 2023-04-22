@@ -25,7 +25,7 @@ a.onmousemove = (e) => {
   
   // Compute mouse coords in px and in tiles
   x = (e.pageX - a.getBoundingClientRect().left - document.documentElement.scrollLeft - document.body.scrollLeft)*2;
-  y = (e.pageY - a.getBoundingClientRect().top - document.documentElement.scrollTop - document.body.scrollTop)*2+50;
+  y = (e.pageY - a.getBoundingClientRect().top - document.documentElement.scrollTop - document.body.scrollTop)*2;
   //console.log(x,y);
   tile_x = Math.floor(x / 32);
   tile_y = Math.floor((y - 40) / 32);
@@ -130,8 +130,8 @@ var handle_clicks = (e) => {
     // Quit
     c.beginPath();
     c.rect(1240, 0, 32, 32);
-    //console.log(x,y);
-    if(x > 1240 && y < 70){
+    console.log(x,y);
+    if(x > 1240 && y < 100){
       clearInterval(loop);
       screen = last_screen;
       draw_screen();
