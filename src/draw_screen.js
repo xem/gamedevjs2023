@@ -59,6 +59,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.font = "bold 50px courier"
     c.fillText("Levels", 600,80);
     c.fillText("Bonus", 300,400);
+    c.fillText("Music", 1100,430);
     
     c.font = "bold 25px courier"
     //c.fillRect(590, 520, 100, 80);
@@ -77,9 +78,10 @@ var draw_screen = onload = onhashchange = (no_reset) => {
       }
     }
     
+    totaltime=k;
     
     
-    c.fillStyle = (+localStorage["chronorobot"] == 21 ? "#000" : "#888");
+    c.fillStyle = (+localStorage["chronorobot"] >= 21 ? "#000" : "#888");
     c.fillRect(50,450,500,100);
     c.fillStyle = (k <= 11730 ? "#000" : "#888");
     c.fillRect(50,570,500,100);
@@ -99,6 +101,11 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     
     
     c.fillStyle = "#000";
+    
+    c.fillRect(1050,450,100,70);
+    c.fillStyle = "#FFF";
+    c.font = "bold 50px courier";
+    c.fillText(musicon ? "ON" : "OFF", 1100, 500);
     //c.fillText("◀", 70, 70);
     //c.fillText("JS13K LEVELS", 640, 70);
     //c.fillText("TWITTER LEVELS", 640, 470);
@@ -111,8 +118,8 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.closePath();
     
     c.drawImage(arc, 970, 550, 300, 313);
-    c.drawImage(ol, 670, 380, 400, 400);
-    c.drawImage(rob, 620, 570, 123, 202);
+    c.drawImage(ol, 650, 380, 400, 400);
+    c.drawImage(rob, 600, 570, 123, 202);
       
   }
   

@@ -1,3 +1,6 @@
+musicon = 0;
+musicstarted = 0;
+
 // Sound by Anders Kaare
 function mkaudio(fn) {
 	var data = [];
@@ -218,3 +221,110 @@ window.onload = function () {
 	}
 }
 */
+
+// Music by Anders Kaare
+// http://veralin.dk/2k.html
+Music = () => {
+
+  MM=new (function(){
+    if (!window.AudioContext) return;
+
+    var M=this;
+
+    var ctx=new AudioContext;
+    var node=ctx.createScriptProcessor(4096,0,1);
+
+    // "constants"
+    var RATE=ctx.sampleRate/48e3;
+    var POW=Math.pow;
+    var SIN=Math.sin;
+    var RND=Math.random;
+    var NSIN=function(x){return SIN(x)+RND()*0.6};
+    var P2=Math.PI*2;
+    //var PRB=function(x){return RND()<x;};
+    var OSC=function(fn){
+      var x=0;
+      return function(note) {
+        x+=POW(2,note/12)*RATE;
+        if(x>P2)x-=P2;
+        return musicon ? fn(x)/4 : 0;
+      };
+    };
+
+    // oscillators
+    var snare=OSC(NSIN);
+    var pling=OSC(function(x) {
+      return (x/P2-0.5);
+    });
+    var pling2=OSC(function(x) {
+      return (x/P2-0.5);
+    });
+    var bass=OSC(function (x) {
+      return (x/P2-0.5)+POW(SIN(x),5)*3;
+    });
+
+    var pos=1;
+    var step=-1;
+    var vibrato=0;
+
+    node.onaudioprocess = function(e) {
+      var data = e.outputBuffer.getChannelData(0);
+      for (var i=0;i<data.length;i++) {
+        pos+=M.t/RATE;
+        vibrato+=0.001/RATE;
+        if(pos>=1){
+          pos-=1;
+          step++;
+        }
+        var decay=1-pos;
+
+        var o=0;
+
+        var X=null;
+        var bt=0;
+
+        var lseq,lseq2;
+        if ((step%128)<64) {
+          //lseq = [3,4,4,4,3,4,0,-3,0,X,X,0,X,X,0,X,3,4,4,4,3,4,0,-3,0,12,X,12,12,X,X,X];
+          //lseq2 = [X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,-1,0,0,0,-1,0,-5,-8,-5,X,X,-5,X,X,-5,X,X];
+        } else {
+          //lseq = [6,7,7,7,6,5,4,2,-5,X,X,7,X,X,X];
+          //lseq2 = [X,X,X,X,-10,-5,X,X,X,-10];
+          bt = -5;
+        }
+
+        //var L=lseq.length;
+        //var ln = lseq[step%L];
+        //if (ln!=X) o+=pling(-81+ln+24)*decay*M.p;
+
+        //L=lseq2.length;
+        //var ln = lseq2[step%L];
+        //if (ln!=X) o+=pling2(-81+ln+24+SIN(vibrato)*0.05)*decay*M.p;
+
+        var bseq=[0,X,X,0,7,9,X,7];
+        L=bseq.length;
+        var bseq2=[X,12,X,12,12,X];
+        var bn = (((step/L)&3)<3?bseq:bseq2)[step%L];
+        if (bn!=X) o+=bass(-81+bn+bt-SIN(vibrato)*0.05)*M.b*decay;
+
+        var drumx=((1-pos)+(step&1))/2;
+        if ((step&2)==2) o += snare(-70+POW(drumx,15)*60)*M.s*decay*RND();
+
+
+        data[i]=o;
+      }
+    };
+    node.connect(ctx.destination);
+
+    // hi xem, this is the interface:
+    M.stop = function() { node.disconnect(); } // XXX you can remove this to conserve space
+
+    M.s = 0.1; // snare volume
+    M.p = 0.2; // pling volume
+    M.b = 0.2; // bass volume
+    M.t=.8e-4; // tempo
+  })
+
+}
+
+//Music();

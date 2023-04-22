@@ -85,6 +85,31 @@ var handle_clicks = (e) => {
     }
     c.closePath();
     
+    c.beginPath();
+    c.rect(1050,450,100,70);
+    if(c.isPointInPath(x, y)){
+      musicon = 1 - musicon;
+      if(musicon && !musicstarted) {Music(); musicstarted = 1; }
+      draw_screen();
+    }
+    c.closePath();    
+    
+    c.beginPath();
+    c.rect(50,450,500,100);
+    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 21){
+      screen = 3;
+      reset_maker_level();
+      draw_screen();
+    }
+    c.closePath();
+    
+    c.beginPath();
+    c.rect(50,570,500,100);
+    if(c.isPointInPath(x, y) && totaltime <= 11730){
+      location = "https://xem.github.io/gamedevjs2023/web3/index.html?t=" + totaltime
+    }
+    c.closePath();
+    
     // Shared levels
     c.beginPath();
     c.rect(590, 520, 100, 80);
