@@ -153,7 +153,7 @@ var handle_clicks = (e) => {
     // Quit
     c.beginPath();
     c.rect(1240, 0, 32, 32);
-    console.log(x,y);
+    //console.log(x,y);
     if(x > 1240 && y < 100){
       clearInterval(loop);
       screen = last_screen;

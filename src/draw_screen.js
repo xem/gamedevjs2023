@@ -96,7 +96,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.fillText("Web3 Leaderboards / shop",290,610);
     c.font = "bold 25px courier"
     c.fillText("(beat the dev times to unlock)",290,650);
-    console.log(k);
+    //console.log(k);
     
     
     

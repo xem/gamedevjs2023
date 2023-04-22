@@ -1394,7 +1394,7 @@ var victory_or_defeat = () => {
         localStorage["chronorobot" + level] = Math.min(+localStorage["chronorobot" + level], chrono);
       }
       else{
-        console.log(localStorage["chronorobot" + level], chrono);
+        //console.log(localStorage["chronorobot" + level], chrono);
         localStorage["chronorobot" + level] = chrono;
         //console.log(localStorage["chronorobot" + level], chrono);
       }

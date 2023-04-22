@@ -67,10 +67,10 @@ var play = () => {
   reset_mechanisms();
   
 
-  console.log("=");
+  //console.log("=");
   // Replay previous heros inputs
   for(hero in heros){
-    console.log("play", hero, heros[hero].x)
+    //console.log("play", hero, heros[hero].x)
     play_hero(heros[hero], 1);
   }
   
