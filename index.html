@@ -9,12 +9,31 @@
   <img src=overlord.png hidden id=ol>
   <img src=bglite.jpg hidden id=bg>
   <img src=rob.png hidden id=rob>
-
+  <div id=deletes onclick="deletesave();event.preventDefault();event.stopPropagation();return false" style="font:bold 14px courier;color:#000;cursor:pointer;margin:-60px 0 0 -20px;display:none">Delete save data</div>
 </center>
 
 <script src=src/sound.js></script>
 
 <script>
+deletesave = () => {
+  if(confirm("are you sure?")){
+    for(i in localStorage){
+      if(i.includes("chronorobot")){
+        delete localStorage[i];
+      }
+    }
+  }
+  deletes.style.display = "none";
+}
+
+onload = () => {
+for(i in localStorage){
+  if(i.includes("chronorobot")){
+    deletes.style.display = "block";
+  }
+}
+}
+
 page = 0;
 musicon=1;
 c=a.getContext`2d`;
@@ -48,7 +67,7 @@ onclick = () => {
     setTimeout(()=>{
       c.drawImage(bg, 0, -600, 1280, 1589);
       c.fillText("Arcadia city, year 2223...", 300, 110);
-      c.fillText("skip >", 1050, 645);
+      c.fillText("skip >", 1050, 675);
     }, 30)
     
     setTimeout(()=>{
