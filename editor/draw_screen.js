@@ -82,7 +82,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     }
     
     totaltime=k;
-    
+    console.log(k);
     
     c.fillStyle = (+localStorage["chronorobot"] >= 21 ? "#000" : "#888");
     c.fillRect(50,450,500,100);
@@ -92,7 +92,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.fillStyle = "#fff";
     c.fillText("Level editor",290,490);
     c.font = "bold 25px courier"
-    c.fillText("(complete the game to unlock)",290,530);
+    c.fillText("(pass level 17 to unlock)",290,530);
     
     c.font = "bold 30px courier"
     c.fillStyle = "#fff";

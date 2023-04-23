@@ -79,7 +79,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     }
     
     totaltime=k;
-    
+    console.log(totaltime);
     
     c.fillStyle = (+localStorage["chronorobot"] >= 21 ? "#000" : "#888");
     c.fillRect(50,450,500,100);
@@ -89,13 +89,13 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.fillStyle = "#fff";
     c.fillText("Level editor",290,490);
     c.font = "bold 25px courier"
-    c.fillText("(complete the game to unlock)",290,530);
+    c.fillText("(pass level 17 to unlock)",290,530);
     
     c.font = "bold 30px courier"
     c.fillStyle = "#fff";
     c.fillText("Web3 Leaderboards / shop",290,610);
     c.font = "bold 25px courier"
-    c.fillText("(beat the dev times to unlock)",290,650);
+    c.fillText("(Total time < 7 min to unlock)",290,650);
     //console.log(k);
     
     
@@ -110,8 +110,9 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     //c.fillText("JS13K LEVELS", 640, 70);
     //c.fillText("TWITTER LEVELS", 640, 470);
     //c.fillText("GO", 640, 570);
-    if(k){
+    if(totaltime){
       c.font = "bold 30px courier";
+      c.fillStyle = "#888";
       c.fillText("Total time: " + ~~((k / 30) / 60) + ":" + ("0" + ((k / 30) % 60).toFixed(2)).slice(-5), 1050, 350);
     }
     c.stroke();

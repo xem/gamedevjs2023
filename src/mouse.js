@@ -96,25 +96,26 @@ var handle_clicks = (e) => {
     
     c.beginPath();
     c.rect(50,450,500,100);
-    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 21){
-      location = "https://xem.github.io/gamedevjs2023/editor/index.html";
+    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 18){
+      window.open("https://xem.github.io/gamedevjs2023/editor/index.html");
     }
     c.closePath();
     
     c.beginPath();
     c.rect(50,570,500,100);
-    if(c.isPointInPath(x, y) && totaltime <= 11730){
-      location = "https://xem.github.io/gamedevjs2023/web3/index.html?t=" + totaltime
+    if(c.isPointInPath(x, y) && totaltime <= 12600){
+      window.open("https://xem.github.io/gamedevjs2023/web3/index.html?t=" + totaltime)
     }
     c.closePath();
     
     // Shared levels
-    c.beginPath();
+    /*c.beginPath();
     c.rect(590, 520, 100, 80);
     if(c.isPointInPath(x, y)){
       //window.open("https://twitter.com/search?f=tweets&q=%23SuperChronoPortalMaker");
     }
     c.closePath();
+    */
     
     // Levels
     for(i = 0; i < 10; i++){

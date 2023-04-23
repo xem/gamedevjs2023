@@ -96,7 +96,7 @@ var handle_clicks = (e) => {
     
     c.beginPath();
     c.rect(50,450,500,100);
-    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 21){
+    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 18){
       location = "https://xem.github.io/gamedevjs2023/editor/index.html";
     }
     c.closePath();
