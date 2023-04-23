@@ -74,6 +74,9 @@ var draw_screen = onload = onhashchange = (no_reset) => {
         if(localStorage["chronorobot" + l] <= levels[l].record){
           c.fillText("🏅", i * 120 + 135, j * 100 + 145);
         }
+        else if(localStorage["chronorobot" + l] <= levels[l].record){
+          c.fillText("✅", i * 120 + 135, j * 100 + 145);
+        }
         k += (+localStorage["chronorobot" + l] || 0);
       }
     }
