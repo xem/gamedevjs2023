@@ -207,6 +207,14 @@ var handle_clicks = (e) => {
     c.beginPath();
     c.rect(910, 4, 100, 32);
     if(c.isPointInPath(x, y)){
+      window.open("https://xem.github.io/gamedevjs2023/src#" + JSON.stringify({hash:level_data.hash.replace(/0*$/,''), pipes:level_data.pipes, balances: level_data.balances}).replace("{","%7b").replace("}","%7d").replace(/"/g,"%22"));
+    }
+    c.closePath();
+    
+    // CLEAR
+    c.beginPath();
+    c.rect(1000, 4, 100, 32);
+    if(c.isPointInPath(x, y)){
       reset_maker_level();
       draw_screen();
     }

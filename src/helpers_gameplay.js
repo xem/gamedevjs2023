@@ -1017,7 +1017,7 @@ var play_hero = (this_hero, past) => {
       current_cube.cube_below = null;
 
       // Throw it if hero is not grounded and game complete
-      if(!this_hero.grounded && +localStorage["chronorobot"] >= 21){
+      if(0 && !this_hero.grounded && +localStorage["chronorobot"] >= 21){
         
         // Left
         if(this_hero.direction == 0 && !is_solid(tile_at(current_cube.x - 14, current_cube.y + 16))){

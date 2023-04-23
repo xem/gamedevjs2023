@@ -359,11 +359,11 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.lineWidth = 1;
     for(i = 0; i < 21; i++){
       c.moveTo(i * 32, 40);
-      c.lineTo(i * 32, 648);
+      c.lineTo(i * 32, 380);
     }
     for(j = 0; j < 12; j++){
       c.moveTo(0, 40 + j * 32);
-      c.lineTo(1280, 40 + j * 32);
+      c.lineTo(640, 40 + j * 32);
     }
     
     // Buttons

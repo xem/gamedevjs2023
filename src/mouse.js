@@ -80,8 +80,8 @@ var handle_clicks = (e) => {
     c.beginPath();
     c.rect(30, 30, 50, 50);
     if(c.isPointInPath(x, y)){
-      screen = 0;
-      draw_screen();
+      //screen = 0;
+      //draw_screen();
     }
     c.closePath();
     
@@ -219,7 +219,7 @@ var handle_clicks = (e) => {
     c.rect(1125, 4, 100, 32);
     if(c.isPointInPath(x, y)){
       if(quit()){
-        screen = 0;
+        screen = 1;
         draw_screen();
       }
     }

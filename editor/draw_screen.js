@@ -149,6 +149,8 @@ var draw_screen = onload = onhashchange = (no_reset) => {
   
   if(screen == 3){
     
+    
+    
     // Cursor
     a.style.cursor = "pointer";
     
@@ -362,25 +364,25 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.lineWidth = 1;
     for(i = 0; i < 21; i++){
       c.moveTo(i * 32, 40);
-      c.lineTo(i * 32, 648);
+      c.lineTo(i * 32, 410);
     }
     for(j = 0; j < 12; j++){
       c.moveTo(0, 40 + j * 32);
-      c.lineTo(1280, 40 + j * 32);
+      c.lineTo(640, 40 + j * 32);
     }
     
     // Buttons
     c.fillStyle = "#000";
     c.fillRect(750, 4, 100, 32);
     c.fillRect(875, 4, 100, 32);
-    //c.fillRect(1000, 4, 100, 32);
+    c.fillRect(1000, 4, 100, 32);
     //c.fillRect(1125, 4, 100, 32);
     c.fillStyle = "#fff";
     c.font = "bold 20px courier";
     //c.fillText("TEST", 800, 28);
     c.fillText("SHARE", 800, 28);
-    c.fillText("CLEAR", 925, 28);
-    //c.fillText("EXIT", 1175, 28);
+    c.fillText("TEST", 925, 28);
+    c.fillText("CLEAR", 1050, 28);
     c.stroke();
     c.closePath();
     
