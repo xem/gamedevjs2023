@@ -103,7 +103,7 @@ var handle_clicks = (e) => {
     
     c.beginPath();
     c.rect(50,570,500,100);
-    if(c.isPointInPath(x, y) && totaltime <= 12600){
+    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 21 && totaltime <= 12600){
       window.open("https://xem.github.io/gamedevjs2023/web3/index.html?t=" + totaltime)
     }
     c.closePath();
