@@ -71,10 +71,10 @@ var draw_screen = onload = onhashchange = (no_reset) => {
         c.fillRect(i * 120 + 50, j * 100 + 120, 100, 80);
         c.fillStyle = "#fff";
         c.fillText(+localStorage["chronorobot"] >= (l-2) ? l : "?", i * 120 + 100, j * 100 + 170);
-        if(localStorage["chronorobot" + l] <= levels[l].record){
+        if(+localStorage["chronorobot" + l] <= levels[l].record){
           c.fillText("🏅", i * 120 + 135, j * 100 + 145);
         }
-        else if(localStorage["chronorobot" + l] <= levels[l].record){
+        else if(+localStorage["chronorobot" + l] > levels[l].record){
           c.fillText("✅", i * 120 + 135, j * 100 + 145);
         }
         k += (+localStorage["chronorobot" + l] || 0);
@@ -86,7 +86,28 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     
     c.fillStyle = (+localStorage["chronorobot"] >= 21 ? "#000" : "#888");
     c.fillRect(50,450,500,100);
-    c.fillStyle = (k <= 11730 ? "#000" : "#888");
+    c.fillStyle = (k <= 6*30*60 && +localStorage["chronorobot"] >= 21
+    && localStorage["chronorobot1"]
+    && localStorage["chronorobot2"]
+    && localStorage["chronorobot3"]
+    && localStorage["chronorobot4"]
+    && localStorage["chronorobot5"]
+    && localStorage["chronorobot6"]
+    && localStorage["chronorobot7"]
+    && localStorage["chronorobot8"]
+    && localStorage["chronorobot9"]
+    && localStorage["chronorobot10"]
+    && localStorage["chronorobot11"]
+    && localStorage["chronorobot12"]
+    && localStorage["chronorobot13"]
+    && localStorage["chronorobot14"]
+    && localStorage["chronorobot15"]
+    && localStorage["chronorobot16"]
+    && localStorage["chronorobot17"]
+    && localStorage["chronorobot18"]
+    && localStorage["chronorobot19"]
+    && localStorage["chronorobot20"]
+    ? "#000" : "#888");
     c.fillRect(50,570,500,100);
     c.font = "bold 30px courier"
     c.fillStyle = "#fff";

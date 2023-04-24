@@ -103,7 +103,28 @@ var handle_clicks = (e) => {
     
     c.beginPath();
     c.rect(50,570,500,100);
-    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 21 && totaltime <= 30*60*6){
+    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 21
+    && localStorage["chronorobot1"]
+    && localStorage["chronorobot2"]
+    && localStorage["chronorobot3"]
+    && localStorage["chronorobot4"]
+    && localStorage["chronorobot5"]
+    && localStorage["chronorobot6"]
+    && localStorage["chronorobot7"]
+    && localStorage["chronorobot8"]
+    && localStorage["chronorobot9"]
+    && localStorage["chronorobot10"]
+    && localStorage["chronorobot11"]
+    && localStorage["chronorobot12"]
+    && localStorage["chronorobot13"]
+    && localStorage["chronorobot14"]
+    && localStorage["chronorobot15"]
+    && localStorage["chronorobot16"]
+    && localStorage["chronorobot17"]
+    && localStorage["chronorobot18"]
+    && localStorage["chronorobot19"]
+    && localStorage["chronorobot20"]
+    && totaltime <= 30*60*6){
       window.open("https://xem.github.io/gamedevjs2023/web3/index.html?t=" + totaltime)
     }
     c.closePath();
