@@ -98,7 +98,7 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.fillStyle = "#fff";
     c.fillText("Web3 Leaderboards / shop",290,610);
     c.font = "bold 25px courier"
-    c.fillText("(Total time < 7 min to unlock)",290,650);
+    c.fillText("(Total time < 6 min to unlock)",290,650);
     //console.log(k);
     
     
