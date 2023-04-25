@@ -95,14 +95,14 @@ var handle_clicks = (e) => {
     c.closePath();    
     
     c.beginPath();
-    c.rect(50,450,500,100);
+    c.rect(50,420,500,90);
     if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 18){
       window.open("https://xem.github.io/gamedevjs2023/editor/index.html");
     }
     c.closePath();
     
     c.beginPath();
-    c.rect(50,570,500,100);
+    c.rect(50,525,500,90);
     if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 21
     && localStorage["chronorobot1"]
     && localStorage["chronorobot2"]
@@ -125,7 +125,34 @@ var handle_clicks = (e) => {
     && localStorage["chronorobot19"]
     && localStorage["chronorobot20"]
     && totaltime <= 30*60*6){
-      window.open("https://xem.github.io/gamedevjs2023/web3/index.html?t=" + totaltime)
+      window.open("https://xem.github.io/gamedevjs2023/web3/index.html?t=" + [totaltime, localStorage["chronorobot1"],
+                                                                                         localStorage["chronorobot2"],
+                                                                                         localStorage["chronorobot3"],
+                                                                                         localStorage["chronorobot4"],
+                                                                                         localStorage["chronorobot5"],
+                                                                                         localStorage["chronorobot6"],
+                                                                                         localStorage["chronorobot7"],
+                                                                                         localStorage["chronorobot8"],
+                                                                                         localStorage["chronorobot9"],
+                                                                                         localStorage["chronorobot10"],
+                                                                                         localStorage["chronorobot11"],
+                                                                                         localStorage["chronorobot12"],
+                                                                                         localStorage["chronorobot13"],
+                                                                                         localStorage["chronorobot14"],
+                                                                                         localStorage["chronorobot15"],
+                                                                                         localStorage["chronorobot16"],
+                                                                                         localStorage["chronorobot17"],
+                                                                                         localStorage["chronorobot18"],
+                                                                                         localStorage["chronorobot19"],
+                                                                                         localStorage["chronorobot20"]])
+    }
+    c.closePath();
+    
+    
+    c.beginPath();
+    c.rect(50,630,500,90);
+    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 18){
+      window.open("https://xem.github.io/gamedevjs2023/leaderboards/index.html");
     }
     c.closePath();
     

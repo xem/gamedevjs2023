@@ -1,5 +1,12 @@
+formattime = (k) => {
+  return ~~((k / 30) / 60) + ":" + ("0" + ((k / 30) % 60).toFixed(2)).slice(-5)
+  
+}
+
 // Draw current screen (on load, when draw_screen is called, and when the hash changes)
 // If no_reset is set, update the level editor without loading the map from the hash
+
+
 var draw_screen = onload = onhashchange = (no_reset) => {
   
   // Reset canvas
@@ -61,11 +68,12 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     c.fillText("Bonus", 300,400);
     c.fillText("Music", 1100,430);
     
-    c.font = "bold 25px courier"
+    c.font = "bold 30px courier"
     //c.fillRect(590, 520, 100, 80);
     k = 0;
     for(i = 0; i < 10; i++){
       for(j = 0; j < 2; j++){
+        c.font = "bold 30px courier"
         l = j * 10 + i + 1;
         c.fillStyle = "#000";
         c.fillRect(i * 120 + 50, j * 100 + 120, 100, 80);
@@ -77,15 +85,19 @@ var draw_screen = onload = onhashchange = (no_reset) => {
         else if(+localStorage["chronorobot" + l] > levels[l].record){
           c.fillText("✅", i * 120 + 135, j * 100 + 145);
         }
+        if(+localStorage["chronorobot" + l]){
+          c.font = "bold 17px courier"
+          c.fillText(formattime(+localStorage["chronorobot" + l]), i * 120 + 100, j * 100 + 193);
+        }
         k += (+localStorage["chronorobot" + l] || 0);
       }
     }
     
     totaltime=k;
-    console.log(totaltime);
+    //console.log(totaltime);
     
     c.fillStyle = (+localStorage["chronorobot"] >= 21 ? "#000" : "#888");
-    c.fillRect(50,450,500,100);
+    c.fillRect(50,420,500,90);
     c.fillStyle = (k <= 6*30*60 && +localStorage["chronorobot"] >= 21
     && localStorage["chronorobot1"]
     && localStorage["chronorobot2"]
@@ -108,19 +120,27 @@ var draw_screen = onload = onhashchange = (no_reset) => {
     && localStorage["chronorobot19"]
     && localStorage["chronorobot20"]
     ? "#000" : "#888");
-    c.fillRect(50,570,500,100);
+    c.fillRect(50,525,500,90);
     c.font = "bold 30px courier"
     c.fillStyle = "#fff";
-    c.fillText("Level editor",290,490);
-    c.font = "bold 25px courier"
-    c.fillText("(pass level 17 to unlock)",290,530);
+    c.fillText("Level editor",300,460);
+    c.font = "bold 20px courier"
+    c.fillText("(pass level 17 to unlock)",300,490);
     
     c.font = "bold 30px courier"
     c.fillStyle = "#fff";
-    c.fillText("Web3 Leaderboards / shop",290,610);
-    c.font = "bold 25px courier"
-    c.fillText("(Total time < 6 min to unlock)",290,650);
+    c.fillText("Enter leaderboards / shop",300,565);
+    c.font = "bold 19px courier"
+    c.fillText("(Web3 bonus, total time < 6 min to unlock)",300,595);
     //console.log(k);
+
+    c.fillStyle = "#000";
+    c.fillRect(50,630,500,90);
+    c.font = "bold 30px courier"
+    c.fillStyle = "#fff";
+    c.fillText("Visit leaderboards",300,670);
+    c.font = "bold 20px courier"
+    c.fillText("(Web3 bonus)",300,700);
     
     
     
