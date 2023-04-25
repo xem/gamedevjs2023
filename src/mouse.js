@@ -151,8 +151,8 @@ var handle_clicks = (e) => {
     
     c.beginPath();
     c.rect(50,630,500,90);
-    if(c.isPointInPath(x, y) && +localStorage["chronorobot"] >= 18){
-      window.open("https://xem.github.io/gamedevjs2023/leaderboards/index.html");
+    if(c.isPointInPath(x, y)){
+      window.open("http://meuziere.free.fr/chronorobot/leaderboards.html");
     }
     c.closePath();
     
