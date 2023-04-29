@@ -2,12 +2,12 @@
 
 // Draw a 32x32 tile aligned on the grid
 var draw_tile = (id, tile_x, tile_y) => {
-  c.drawImage(window["tileset" + localStorage["chronorobot_ch"]], id * 32, 0, 32, 32, tile_x * 32, 40 + tile_y * 32, 32, 32);
+  c.drawImage(window["tileset" + (localStorage["chronorobot_ch"] || 0)], id * 32, 0, 32, 32, tile_x * 32, 40 + tile_y * 32, 32, 32);
 }
 
 // Draw a 32x32 sprite anywhere (don't forget to add 40 to y to draw in the scene)
 var draw_sprite = (id, x, y) => {
-  c.drawImage(window["tileset" + localStorage["chronorobot_ch"]], id * 32, 0, 32, 32, x, y, 32, 32);
+  c.drawImage(window["tileset" + (localStorage["chronorobot_ch"] || 0)], id * 32, 0, 32, 32, x, y, 32, 32);
 }
 
 // Which tile is at these coordinates (in px)? (returns 0 by default)

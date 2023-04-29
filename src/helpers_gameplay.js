@@ -1260,7 +1260,7 @@ var draw_hero = (hero, past) => {
 
   // Draw (except if it's a past hero that has finished playing)
   if(! (hero.safe)){
-    c.drawImage(window["tileset" + localStorage["chronorobot_ch"]], [26, [27,28,29][~~(frame / 2) % 3], 30, 31][hero.state] * 32, 0, 32, 32, - hero_width / 2, 40, 32, 32);
+    c.drawImage(window["tileset" + (localStorage["chronorobot_ch"] || 0)], [26, [27,28,29][~~(frame / 2) % 3], 30, 31][hero.state] * 32, 0, 32, 32, - hero_width / 2, 40, 32, 32);
   }
   
   c.restore();
@@ -1508,6 +1508,6 @@ var move_cubes = () => {
     }
 
     // Draw cube
-    c.drawImage(window["tileset" + localStorage["chronorobot_ch"]], 12 * 32, 0, 32, 32, level_data.cubes[i].x, 40 + level_data.cubes[i].y, 32, 32);
+    c.drawImage(window["tileset" + (localStorage["chronorobot_ch"] || 0)], 12 * 32, 0, 32, 32, level_data.cubes[i].x, 40 + level_data.cubes[i].y, 32, 32);
   }
 }
