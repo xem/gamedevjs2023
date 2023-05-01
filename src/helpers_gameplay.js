@@ -846,8 +846,9 @@ var play_hero = (this_hero, past) => {
       mkaudio(SNDcoin1).play();
     }
     
-    // Press Shift
-    if(this_hero.shift[frame]){
+    // Press shift or space or C
+    
+    if(this_hero.shift[frame] || this_hero.C[frame]){
       
       // If in front of the time machine (tile #23)
       if(
@@ -984,7 +985,7 @@ var play_hero = (this_hero, past) => {
     }
     
     // Pick/drop cube toggle
-    if(this_hero.space[frame]){
+    if(this_hero.space[frame] || this_hero.C[frame]){
       this_hero.pickdrop ^= 1;
     }
     
@@ -1015,9 +1016,9 @@ var play_hero = (this_hero, past) => {
       
       current_cube.x = this_hero.x;
       current_cube.cube_below = null;
-
+      console.log(this_hero.C[frame], this_hero.shift[frame]);
       // Throw it if hero is not grounded and game complete
-      if(0 && !this_hero.grounded && +localStorage["chronorobot"] >= 21){
+      if(this_hero.C[frame]){
         
         // Left
         if(this_hero.direction == 0 && !is_solid(tile_at(current_cube.x - 14, current_cube.y + 16))){

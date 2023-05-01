@@ -64,5 +64,10 @@ onkeyup = (e) => {
     if(e.keyCode == 32){
       current_hero.shift[frame] = true;
     }
+    
+    // C 
+    if(e.keyCode == 67){
+      current_hero.C[frame] = true;
+    }
   }
 }

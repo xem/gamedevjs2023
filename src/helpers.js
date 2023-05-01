@@ -62,6 +62,7 @@ var reset_hero = () => {
     right: [],
     space: [],
     shift: [],
+    C: [],
     leftclick: [],
     rightclick: [],
     angle: 0,
